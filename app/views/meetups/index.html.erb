@@ -8,6 +8,8 @@
         <td>No</td>
         <td>Title</td>
         <td>Description</td>
+        <td>Creator</td>
+        <td></td>
       </tr>
     </thead>
     <tbody>
@@ -16,10 +18,14 @@
           <td><%= meetup.id %></td>
           <td><%= link_to(meetup.title, meetup_path(meetup)) %></td>
           <td><%= meetup.description %></td>
+          <td><%= meetup.user.email %></td>
           <td>
-            <%= link_to("Edit", edit_meetup_path(meetup), class: "btn btn-default ben-sm") %>
-            <%= link_to("Delete", meetup_path(meetup), class: "btn btn-default ben-sm",
-                        method: :delete, data: { confirm: "Are you sure?" }) %>
+            <% if current_user && meetup.user == current_user %>
+              <%= link_to("Edit", edit_meetup_path(meetup), class: "btn btn-default ben-sm") %>
+              <%= link_to("Delete", meetup_path(meetup), class: "btn btn-default ben-sm",
+                          method: :delete, data: { confirm: "Are you sure?" }) %>
+            <% end %>
+
           </td>
         </tr>
       <% end %>
