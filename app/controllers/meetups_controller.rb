@@ -29,8 +29,7 @@ class MeetupsController < ApplicationController
   end
 
   def update
-    @meetup.update(meetup_params)
-    if @meetup.save
+    if @meetup.update(meetup_params)
       redirect_to meetups_path, notice: "Update Success"
     else
       render :edit
